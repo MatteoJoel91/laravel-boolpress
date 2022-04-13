@@ -56,9 +56,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($slug) // ($slug) perché su api.php abbiamo la rotta -> Route::get('/posts/{slug}', 'Api\PostController@show'); dove tra le parentesi graffe abbiamo slug
     {
-        $post = Post::where('slug', '=', $slug)->with(['catergory', 'tags'])->first();
+        $post = Post::where('slug', '=', $slug)->with(['category', 'tags'])->first();
 
         if($post){
             return response()->json(

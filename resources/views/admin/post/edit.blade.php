@@ -13,8 +13,8 @@
 
         <div class="form-group mb-3">
           <label for="category_id">Categoria</label>
-          <select class="form-control" id="category_id" name="category_id" aria-label="Default select example">
-            <option value="category_id">Nessuna categoria</option>
+          <select class="form-control" id="category_id" name="category_id">
+            <option value="">Nessuna categoria</option>
             @foreach ($categories as $category)
                 <option {{old('category_id', $post->category_id) == $category->id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
             @endforeach

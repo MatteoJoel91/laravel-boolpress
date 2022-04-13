@@ -5,13 +5,15 @@
 
         <div class="row">
             <div class="col-4 d-flex flex-wrap justify-content-center m-auto" v-for="post in posts" :key="post.id">
-                <div class="card " style="width: 25rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{post.title}}</h5>
-                        <p class="card-text">{{post.content}}</p>
-                        <a href="#" class="btn btn-primary">Vedi articolo intero</a>
-                    </div>
-                </div>
+                <Post
+                
+                    :title="post.title"
+                    :content="post.content"
+                    :slug="post.slug"
+                    :category="post.category"
+                    :tags="post.tags"
+
+                />
             </div>
         </div>
 
@@ -29,8 +31,14 @@
 </template>
 
 <script>
+
+import Post from '../components/Post.vue';
+
 export default {
     name: 'Main',
+    components: {
+        Post
+    },
 
     data(){
         return{

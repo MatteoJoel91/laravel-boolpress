@@ -19,7 +19,7 @@
             </li>
             <li class="nav-item">
               <!-- <a class="nav-link" href="/posts">Post</a> -->
-              <router-link class="nav-link" :to="{name: 'posts'}">Post</router-link>
+              <router-link class="nav-link" :to="{name: 'blog'}">Blog</router-link>
             </li>
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -44,6 +44,7 @@ export default {
 <style>
   .navbar{
     height: 10vh;
+    background-color: lightgray!important;;
   }
   .router-link-exact-active{
     color: rgb(61, 61, 244)!important;

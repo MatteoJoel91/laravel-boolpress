@@ -21,7 +21,7 @@
                   <td>{{$post->title}}</td>
                   <td>{{substr($post->content, 0, 30)}}</td>
                   <td>{{$post->slug}}</td>
-                  <td>{{$post->category->name}}</td>
+                  <td>{{isset($post->category) ? $post->category->name:'N.D.'}}</td>
                   <td>
                     <div class="d-flex justify-content-center">
 
