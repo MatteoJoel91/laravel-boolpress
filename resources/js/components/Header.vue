@@ -5,21 +5,9 @@
         <a class="navbar-brand" href="#">Boolpress</a>
         
           <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-            <li class="nav-item">
+            <li class="nav-item" v-for="menuItem in menuItems" :key="menuItem.routeName">
               <!-- <a class="nav-link" href="/">Home</a> -->
-              <router-link class="nav-link" :to="{name: 'home'}">Home</router-link>
-            </li>
-            <li class="nav-item">
-              <!-- <a class="nav-link" href="/chi-siamo">Chi siamo</a> -->
-              <router-link class="nav-link" :to="{name: 'about'}">Chi siamo</router-link>
-            </li>
-            <li class="nav-item">
-              <!-- <a class="nav-link" href="/contatti">Contatti</a> -->
-              <router-link class="nav-link" :to="{name: 'contact'}">Contatti</router-link>
-            </li>
-            <li class="nav-item">
-              <!-- <a class="nav-link" href="/posts">Post</a> -->
-              <router-link class="nav-link" :to="{name: 'blog'}">Blog</router-link>
+              <router-link class="nav-link" :to="{name: menuItem.routeName}">{{menuItem.label}}</router-link>
             </li>
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -35,7 +23,30 @@
 
 <script>
 export default {
-    name: 'Header',
+  name: 'Header',
+
+  data() {
+    return {
+      menuItems:[
+        {
+          routeName: 'home',
+          label: 'Home',
+        },
+        {
+          routeName: 'about',
+          label: 'Chi Siamo',
+        },
+        {
+          routeName: 'contact',
+          label: 'Contatti',
+        },
+        {
+          routeName: 'blog',
+          label: 'Blog',
+        },
+      ]
+    }
+  }
 
 }
 </script>

@@ -1952,20 +1952,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Header'
+  name: 'Header',
+  data: function data() {
+    return {
+      menuItems: [{
+        routeName: 'home',
+        label: 'Home'
+      }, {
+        routeName: 'about',
+        label: 'Chi Siamo'
+      }, {
+        routeName: 'contact',
+        label: 'Contatti'
+      }, {
+        routeName: 'blog',
+        label: 'Blog'
+      }]
+    };
+  }
 });
 
 /***/ }),
@@ -2014,7 +2019,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Post',
-  props: ['title', 'content', 'slug', 'category', 'tags']
+  props: ['title', 'content', 'slug', 'category', 'tags'],
+  data: function data() {
+    return {
+      strTruncateLen: 50
+    };
+  },
+  methods: {
+    truncateText: function truncateText(text) {
+      if (text.length > this.strTruncateLen) {
+        return text.substring(0, 50) + '...';
+      }
+
+      return text;
+    }
+  }
 });
 
 /***/ }),
@@ -3586,59 +3605,28 @@ var render = function () {
           _vm._v("Boolpress"),
         ]),
         _vm._v(" "),
-        _c("ul", { staticClass: "navbar-nav mr-auto mb-2 mb-lg-0" }, [
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                { staticClass: "nav-link", attrs: { to: { name: "home" } } },
-                [_vm._v("Home")]
-              ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                { staticClass: "nav-link", attrs: { to: { name: "about" } } },
-                [_vm._v("Chi siamo")]
-              ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                { staticClass: "nav-link", attrs: { to: { name: "contact" } } },
-                [_vm._v("Contatti")]
-              ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                { staticClass: "nav-link", attrs: { to: { name: "blog" } } },
-                [_vm._v("Blog")]
-              ),
-            ],
-            1
-          ),
-        ]),
+        _c(
+          "ul",
+          { staticClass: "navbar-nav mr-auto mb-2 mb-lg-0" },
+          _vm._l(_vm.menuItems, function (menuItem) {
+            return _c(
+              "li",
+              { key: menuItem.routeName, staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: menuItem.routeName } },
+                  },
+                  [_vm._v(_vm._s(menuItem.label))]
+                ),
+              ],
+              1
+            )
+          }),
+          0
+        ),
         _vm._v(" "),
         _vm._m(0),
       ]),
@@ -3712,10 +3700,12 @@ var render = function () {
         _c("h2", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
         _c("h4", { staticClass: "card-text" }, [
-          _vm._v(_vm._s(_vm.category ? _vm.category : " ")),
+          _vm._v(_vm._s(_vm.category ? _vm.category.name : " ")),
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.content))]),
+        _c("p", { staticClass: "card-text" }, [
+          _vm._v(_vm._s(_vm.truncateText(_vm.content))),
+        ]),
         _vm._v(" "),
         _c(
           "router-link",

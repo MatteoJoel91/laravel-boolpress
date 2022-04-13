@@ -16,9 +16,7 @@ class PostController extends Controller
     public function index()
     {
         // laravel risolve per noi la relation con category
-        $posts = Post::with(['category'])->get();
-
-        $posts = Post::paginate(2);
+        $posts = Post::with(['category'])->paginate(2);
 
         return response()->json(
             [
