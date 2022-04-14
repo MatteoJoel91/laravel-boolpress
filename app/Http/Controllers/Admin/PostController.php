@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 // per far funzionare la Str in store e update
 use Illuminate\Support\Str;
 
@@ -57,10 +57,17 @@ class PostController extends Controller
             'content' => 'required|min:10',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $data = $request->all();
 
+        // se dal form ho definito un campo image, e lo abbiamo fatto, allora laravel salva in storage nella cartella post_covers il file
+        if (isset($data['image'])) {
+            $cover_path = Storage::put('post_covers', $data['image']);
+            $data['cover'] = $cover_path; // laravel dammi quel path, nel campo cover viene salvato questo path
+        }
+        
         $slug = Str::slug($data['title']);
 
         $counter = 1;
@@ -80,7 +87,10 @@ class PostController extends Controller
 
         $post->save();
 
-        $post->tags()->sync($data['tags']);
+        if (isset($data['tags'])) {
+            $post->tags()->sync($data['tags']);
+        }
+        // $post->tags()->sync($data['tags']);
 
         return redirect()->route('admin.posts.index');
     }
@@ -125,13 +135,26 @@ class PostController extends Controller
             'content' => 'required|min:10',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $data = $request->all();
 
+        // se dal form ho definito un campo image, e lo abbiamo fatto, allora laravel salva in storage nella cartella post_covers il file
+        if (isset($data['image'])) {
+
+            // non cancellare un file che sul server non è definito
+            if ($post->cover) {
+                // cancello la vecchia immagine se viene modificata
+                Storage::delete($post->cover);
+            }
+            
+            $cover_path = Storage::put('post_covers', $data['image']);
+            $data['cover'] = $cover_path; // laravel dammi quel path, nel campo cover viene salvato questo path
+        }
+
         $slug = Str::slug($data['title']);
 
-        // 
         if ($post->slug != $slug) {
             
             $counter = 1;
@@ -164,6 +187,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+
+        if ($post->cover) {
+            Storage::delete($post->cover);
+        }
+
         $post->delete();
 
         return redirect()->route('admin.posts.index');

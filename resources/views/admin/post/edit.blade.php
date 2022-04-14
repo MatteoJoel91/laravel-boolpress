@@ -3,13 +3,23 @@
 @section('content')
     <div class="container">
 
-      <h1>Modifica il post</h1>
+      <h1 class="mb-3">Modifica il post</h1>
 
-      <form method="POST" action="{{route('admin.posts.update', $post->id)}}">
+      <form method="POST" action="{{route('admin.posts.update', $post->id)}}" enctype="multipart/form-data">
 
         @csrf
 
         @method('PUT')
+
+        @if ($post->cover)
+        <h5>Immagine attuale</h5>
+        <img class="mb-2 img-thumbnail" src="{{asset('storage/' .$post->cover )}}" alt="{{$post->title}}">
+        @endif
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Carica nuova immagine (max 2 MB)</label>
+          <input class="form-control-file" type="file" id="image" name="image">
+        </div>
 
         <div class="form-group mb-3">
           <label for="category_id">Categoria</label>

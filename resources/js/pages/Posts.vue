@@ -8,6 +8,7 @@
                 <Post
                 
                     :title="post.title"
+                    :img="post.cover"
                     :content="post.content"
                     :slug="post.slug"
                     :category="post.category"

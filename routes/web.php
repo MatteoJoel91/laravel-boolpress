@@ -29,6 +29,10 @@ Route::middleware('auth')
 
 });
 
+Route::get('/phpinfo', function() {
+    phpinfo();
+});
+
 Route::get('{any?}', function(){
     return view('guests.home');
 })->where('any', '.*');

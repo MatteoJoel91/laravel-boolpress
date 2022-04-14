@@ -2025,9 +2025,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Post',
-  props: ['title', 'content', 'slug', 'category', 'tags'],
+  props: ['img', 'title', 'content', 'slug', 'category', 'tags'],
   data: function data() {
     return {
       strTruncateLen: 50
@@ -2175,6 +2177,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Main',
@@ -2220,6 +2223,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2357,7 +2361,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nmain{\n    width: 100%;\n    height: 80vh;\n}\n", ""]);
+exports.push([module.i, "\nmain{\n    width: 100%;\n    min-height: 80vh;\n}\n", ""]);
 
 // exports
 
@@ -3707,9 +3711,14 @@ var render = function () {
       [
         _c("h2", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
+        _c("img", {
+          staticClass: "img-fluid mb-2",
+          attrs: { src: _vm.img, alt: "title" },
+        }),
+        _vm._v(" "),
         _c("h4", { staticClass: "card-text" }, [
           _vm._v(
-            "Categoria: " + _vm._s(_vm.category ? _vm.category.name : " ")
+            "Categoria: " + _vm._s(_vm.category ? _vm.category.name : "N.D.")
           ),
         ]),
         _vm._v(" "),
@@ -3718,13 +3727,12 @@ var render = function () {
           _vm._v(" "),
           _c(
             "h5",
-            { staticClass: "mr-2" },
             _vm._l(_vm.tags, function (tag) {
               return _c(
                 "span",
                 {
                   key: tag.id,
-                  staticClass: "badge rounded-pill bg-primary text-light",
+                  staticClass: "badge rounded-pill bg-primary text-light mr-1",
                 },
                 [
                   _vm._v(
@@ -3949,6 +3957,7 @@ var render = function () {
               _c("Post", {
                 attrs: {
                   title: post.title,
+                  img: post.cover,
                   content: post.content,
                   slug: post.slug,
                   category: post.category,
@@ -4045,6 +4054,11 @@ var render = function () {
                   _vm._v(_vm._s(_vm.post.title)),
                 ]),
                 _vm._v(" "),
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: { src: _vm.post.cover, alt: _vm.post.title },
+                }),
+                _vm._v(" "),
                 _vm.post.category
                   ? _c("h3", { staticClass: "my-3" }, [
                       _vm._v("Categoria: " + _vm._s(_vm.post.category.name)),
@@ -4072,7 +4086,7 @@ var render = function () {
                 _c(
                   "router-link",
                   {
-                    staticClass: "btn btn-primary",
+                    staticClass: "btn btn-primary mb-5",
                     attrs: { to: { name: "blog" } },
                   },
                   [_vm._v("Torna indietro")]

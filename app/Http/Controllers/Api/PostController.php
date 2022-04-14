@@ -15,8 +15,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        // laravel risolve per noi la relation con category
+        // $posts = Post::with(['category'])->get(),   Laravel risolve per noi la relation con category
         $posts = Post::with(['category', 'tags'])->paginate(2);
+
+        $posts->each(function($post) {
+
+            if ($post->cover) {
+                $post->cover = url('storage/' .$post->cover);
+            }else{
+                $post->cover = url('img/fallback_img.jpg');
+            }
+
+        });
 
         return response()->json(
             [
@@ -57,6 +67,12 @@ class PostController extends Controller
     public function show($slug) // ($slug) perché su api.php abbiamo la rotta -> Route::get('/posts/{slug}', 'Api\PostController@show'); dove tra le parentesi graffe abbiamo slug
     {
         $post = Post::where('slug', '=', $slug)->with(['category', 'tags'])->first();
+
+        if ($post->cover) {
+            $post->cover = url('storage/' .$post->cover);
+        }else{
+            $post->cover = url('img/fallback_img.jpg');
+        }
 
         if($post){
             return response()->json(

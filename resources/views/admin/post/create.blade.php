@@ -3,12 +3,17 @@
 @section('content')
     <div class="container">
 
-      <form method="POST" action="{{route('admin.posts.store')}}">
+      <form method="POST" action="{{route('admin.posts.store')}}" enctype="multipart/form-data">
 
         @csrf
 
+        <div class="mb-3">
+          <label for="image" class="form-label">Carica un immagine (max 2 MB)</label>
+          <input class="form-control-file" type="file" id="image" name="image">
+        </div>
+
         <div class="form-group mb-3">
-          <label for="category_id">Categoria</label>
+          <label>Scegli categoria</label>
           <select class="form-control" id="category_id" name="category_id">
             <option value="">Nessuna categoria</option>
             @foreach ($categories as $category)

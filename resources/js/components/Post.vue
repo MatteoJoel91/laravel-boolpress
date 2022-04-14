@@ -2,11 +2,13 @@
     <div class="card " style="width: 25rem;">
         <div class="card-body">
             <h2 class="card-title">{{title}}</h2>
-            <h4 class="card-text">Categoria: {{ category ? category.name :'&nbsp;'}}</h4>
+            <img class="img-fluid mb-2" :src="img" alt="title">
+            <!-- se voglio lasciare la categoria vuota in caso non ci sia uso &nbsp; -->
+            <h4 class="card-text">Categoria: {{ category ? category.name :'N.D.'}}</h4>
             <div class="d-flex mb-2">
                 <span class="mr-2">Tag: </span>
-                <h5 class="mr-2">
-                    <span v-for="tag in tags" :key="tag.id" class="badge rounded-pill bg-primary text-light">
+                <h5>
+                    <span v-for="tag in tags" :key="tag.id" class="badge rounded-pill bg-primary text-light mr-1">
                         {{tag.name}}
                     </span>
                 </h5>
@@ -21,7 +23,7 @@
 <script>
 export default {
     name: 'Post',
-    props: ['title', 'content', 'slug', 'category', 'tags'],
+    props: ['img', 'title', 'content', 'slug', 'category', 'tags'],
 
     data() {
         return {

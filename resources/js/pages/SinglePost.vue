@@ -4,6 +4,7 @@
             <div class="col">
                 <div v-if="post">
                     <h1 class="my-3 text-center">{{post.title}}</h1>
+                    <img class="img-fluid" :src="post.cover" :alt="post.title">
                     <h3 class="my-3" v-if="post.category">Categoria: {{post.category.name}}</h3>
                     <p>{{post.content}}</p>
                     <p>Tags: </p>
@@ -12,7 +13,7 @@
                             {{tag.name}}
                         </li>
                     </ul>
-                    <router-link class="btn btn-primary" :to="{name: 'blog'}">Torna indietro</router-link>
+                    <router-link class="btn btn-primary mb-5" :to="{name: 'blog'}">Torna indietro</router-link>
                 </div>
             </div>
         </div>

@@ -13,6 +13,6 @@ export default {
 <style>
     main{
         width: 100%;
-        height: 80vh;
+        min-height: 80vh;
     }
 </style>
