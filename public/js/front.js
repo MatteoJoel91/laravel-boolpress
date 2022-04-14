@@ -3714,7 +3714,7 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "d-flex mb-2" }, [
-          _c("span", { staticClass: "mr-2" }, [_vm._v("Tags: ")]),
+          _c("span", { staticClass: "mr-2" }, [_vm._v("Tag: ")]),
           _vm._v(" "),
           _c(
             "h5",
