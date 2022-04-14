@@ -2017,6 +2017,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Post',
   props: ['title', 'content', 'slug', 'category', 'tags'],
@@ -3700,7 +3708,35 @@ var render = function () {
         _c("h2", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
         _c("h4", { staticClass: "card-text" }, [
-          _vm._v(_vm._s(_vm.category ? _vm.category.name : " ")),
+          _vm._v(
+            "Categoria: " + _vm._s(_vm.category ? _vm.category.name : " ")
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "d-flex mb-2" }, [
+          _c("span", { staticClass: "mr-2" }, [_vm._v("Tags: ")]),
+          _vm._v(" "),
+          _c(
+            "h5",
+            { staticClass: "mr-2" },
+            _vm._l(_vm.tags, function (tag) {
+              return _c(
+                "span",
+                {
+                  key: tag.id,
+                  staticClass: "badge rounded-pill bg-primary text-light",
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(tag.name) +
+                      "\n                "
+                  ),
+                ]
+              )
+            }),
+            0
+          ),
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
