@@ -12,7 +12,7 @@
       @endif
       
       <div class="mb-2">Titolo: {{$post->title}}</div>
-      <div class="mb-2">Categoria: {{$post->category->name}}</div>
+      <div class="mb-2">Categoria: {{isset($post->category) ? $post->category->name : 'N.D.'}}</div>
       <div class="mb-2">Contenuto: {!! $post->content !!}</div>
       <div class="mb-2">Slug: {{$post->slug}}</div>
       <div class="d-flex mb-2">
